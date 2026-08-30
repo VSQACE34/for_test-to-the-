@@ -1,0 +1,22 @@
+{
+  "summary": "Frontend-only Sethu Clinical Trial Eligibility dashboard tested end-to-end via Playwright at the public preview URL. All 12 requested feature checks pass. App loads with 'Sethu' title, 7 volunteers (V-1042..V-1048) sorted pending-first, injection banner visible/non-dismissible/mentions V-1044, V-1046 shows c05 and c07 in missing state with exact text 'Cannot resolve: data not available' and scoring '9 of 11 cleared / 82%', V-1045 c09 contradiction box shows Record 1 88.4 kg and Record 2 79.6 kg with timestamps, criteria strip ordered c01..c11 ascending, Accept/Exclude update in-memory decisions and reorder decided items below pending, Re-screen button starts progressbar with proper aria attrs (role=progressbar, aria-valuemin=0, aria-valuemax=100, valuenow increases 7→16), button disabled during run and shows percentage, evaluation footer collapsed by default and expands to show run/latency/accuracy metrics, keyboard ArrowUp/Down navigation moves selection and updates detail pane, data-source indicator correctly shows 'fixtures (backend unreachable)'. Only observed console errors are expected ERR_CONNECTION_REFUSED from the intentional localhost:8000 re-screen fallback attempt. No JS pageerrors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Evaluation footer expanded panel", "issues": ["Contains the phrase 'gold ground-truth labels' inside the quarantined evaluation panel disclaimer. It is a meta-disclaimer explaining labels are withheld (not actual per-volunteer gold labels), so it does not violate the spec, but reviewers may want to reword to avoid the literal phrase 'gold' appearing in any UI surface."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Optional: consider rewording the disclaimer text in EvaluationFooter to avoid the literal token 'gold' if the design intent is that no reference to gold labels ever appears in the UI. Current text is safe (states labels are withheld) but could be tightened."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "None - app uses built-in fixtures at /app/frontend/src/data/volunteers.js.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Frontend-only app. Backend at localhost:8000 is intentionally unreachable; ERR_CONNECTION_REFUSED console errors are expected and are the fallback path being exercised. All data-testid selectors match spec and are stable. Re-screen full progress cycle is ~35s; test above verified progress increases in the first ~5s which is sufficient. Injection banner is intentionally non-dismissible."
+}

@@ -1,0 +1,138 @@
+{
+  "theme_and_identity": {
+    "name": "Sethu Clinical Trial Dashboard",
+    "archetype": "Swiss & High-Contrast (Medical Variant)",
+    "aesthetic": "Clinical & Dense, calm, precise, professional. NO fluff, NO AI hype, NO emojis.",
+    "density": "High density, minimal whitespace, information-rich rows, compact but readable",
+    "theme_preference": "Light mode default for medical/clinical environments (highest contrast, zero glare)"
+  },
+  "typography": {
+    "fonts": {
+      "sans": "Inter or IBM Plex Sans (for labels, headings, UI text)",
+      "mono": "IBM Plex Mono, Fira Code, or JetBrains Mono (for IDs, scores, dates, source quotes)"
+    },
+    "hierarchy": {
+      "h1": "text-2xl font-semibold tracking-tight",
+      "h2": "text-lg font-medium",
+      "body": "text-sm leading-tight",
+      "labels": "text-xs font-semibold uppercase tracking-wider text-muted-foreground",
+      "mono_data": "font-mono text-sm tracking-tight",
+      "mono_quote": "font-mono text-xs leading-relaxed bg-muted/50 p-2 rounded-sm border border-border"
+    },
+    "guidelines": "Use monospace strictly for data points (IDs, percentages, scores, dates) and exact source excerpts to convey raw, unmodified truth. Use sans-serif for interface navigation and labels."
+  },
+  "colors": {
+    "background": "bg-white (pure functional background)",
+    "surface": "bg-slate-50 (for alternate rows/panes)",
+    "border": "border-slate-200 (sharp, clinical separations)",
+    "text_primary": "text-slate-900",
+    "text_secondary": "text-slate-500",
+    "status": {
+      "pass": {
+        "color": "text-emerald-700 bg-emerald-50 border-emerald-200",
+        "icon": "Check",
+        "pattern": "Solid fill"
+      },
+      "fail": {
+        "color": "text-red-700 bg-red-50 border-red-200",
+        "icon": "X",
+        "pattern": "Cross-hatch (use CSS repeating-linear-gradient or SVG background pattern)"
+      },
+      "neutral_missing": {
+        "color": "text-slate-500 bg-slate-100 border-slate-300",
+        "icon": "Minus",
+        "pattern": "Solid grey or horizontal dash"
+      },
+      "contradiction": {
+        "color": "text-amber-700 bg-amber-50 border-amber-300",
+        "icon": "AlertTriangle",
+        "pattern": "Diagonal stripes"
+      }
+    }
+  },
+  "grids_layouts": {
+    "global": "h-screen flex flex-col overflow-hidden",
+    "main_content": "flex-1 flex overflow-hidden",
+    "left_pane": "w-80 border-r border-slate-200 bg-slate-50 flex flex-col overflow-y-auto (Volunteer Queue)",
+    "right_pane": "flex-1 flex flex-col overflow-y-auto bg-white p-6 (Detail View)",
+    "spacing": "Tight spacing (p-2, p-3, gap-2). Avoid p-8+ unless separating major contextual regions.",
+    "surfaces": "Flat Solid surfaces ONLY. NO Glassmorphism. Medical apps require optical clarity, zero visual refraction."
+  },
+  "components": {
+    "injection_banner": {
+      "style": "bg-red-600 text-white font-medium p-2 text-sm flex items-center justify-center gap-2",
+      "behavior": "Top-level, non-dismissible warning if instruction-like text is detected."
+    },
+    "volunteer_queue": {
+      "item_style": "p-3 border-b border-border cursor-pointer hover:bg-slate-100 focus:bg-slate-200 focus:outline-none focus:ring-1 inset-ring transition-colors",
+      "active_state": "bg-blue-50 border-l-4 border-l-blue-600"
+    },
+    "scoring_display": {
+      "container": "flex items-baseline gap-2 mb-6 pb-4 border-b",
+      "prominent": "text-2xl font-bold font-mono text-slate-900 (e.g. 'N of 11 cleared')",
+      "quiet": "text-sm font-mono text-slate-500 (e.g. '82%')"
+    },
+    "criteria_strip": {
+      "layout": "flex flex-col gap-2",
+      "row": "grid grid-cols-[3rem_auto_1fr] items-start gap-4 p-3 border rounded-md bg-white",
+      "identifier": "font-mono text-xs font-bold text-slate-400 pt-1 (c01..c11)",
+      "status_badge": "w-8 h-8 rounded-sm flex items-center justify-center border",
+      "content": "flex flex-col gap-1",
+      "missing_data": "Fail-loud explicit state: 'Cannot resolve: data not available'",
+      "contradiction": "Surface both values with timestamps explicitly in a bordered sub-block",
+      "confidence": "text-xs font-mono text-slate-500 float-right",
+      "reasoning": "text-sm text-slate-700 mt-1",
+      "excerpt": "mt-2 p-2 bg-slate-50 border border-slate-100 font-mono text-xs text-slate-600"
+    },
+    "evaluation_footer": {
+      "layout": "fixed bottom-0 left-0 right-0 border-t bg-slate-900 text-slate-300",
+      "behavior": "Collapsible strip. Hidden by default. Quarantines technical metrics (latency, accuracy, gold labels).",
+      "typography": "font-mono text-xs p-2"
+    },
+    "actions": {
+      "container": "flex gap-3 mt-6 pt-6 border-t",
+      "accept": "bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-sm shadow-sm",
+      "exclude": "bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium px-4 py-2 rounded-sm",
+      "rescreen": "ml-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-sm relative overflow-hidden"
+    },
+    "progress_bar": {
+      "implementation": "Real 30-60s progress bar inside or overlaying the Re-screen button. Strict linear progression UI. No bouncing/pulsing."
+    }
+  },
+  "visual_enhancers": {
+    "shadows": "Minimal. shadow-sm on primary buttons. The rest is flattened with 1px borders.",
+    "borders": "Sharp edges. Use rounded-sm (2px) or rounded-md (4px) maximum. Never pill-shape unless for small status badges.",
+    "icons": "Lucide-react. Keep stroke-width to 2 for clarity. Do NOT use emojis anywhere."
+  },
+  "motion_and_interactions": {
+    "general": "Instantaneous. 0-100ms transitions for hover states to feel responsive and decisive.",
+    "progress": "Re-screen button uses a steady width transition spanning 30-60 seconds to simulate actual ML pipeline runtime.",
+    "focus": "Aggressive focus rings (focus:ring-2 focus:ring-blue-500 focus:outline-none) for accessibility."
+  },
+  "accessibility_and_testing": {
+    "color_blind_safe": "Mandatory use of specific shapes (Check, X, Minus) AND specific background patterns (solid vs cross-hatch) to ensure state is readable without hue.",
+    "keyboard_nav": "Full keyboard support required. Left pane must support Up/Down arrow key navigation to switch selected volunteers. Attach onKeyDown to the list container, manage active index in state, and focus management.",
+    "aria": "Use aria-live='polite' for the re-screen progress bar and scoring updates.",
+    "data_testid_guidelines": "ALL interactive and informational elements MUST have data-testid attributes (e.g., data-testid='volunteer-item-123', data-testid='accept-btn', data-testid='criteria-c01-status')"
+  },
+  "instructions_to_main_agent": [
+    "DO NOT use .tsx. Use .js extensions as requested by the environment structure.",
+    "NEVER use generic 'AI' aesthetics (gradients, glassmorphism, sparkles, robot emojis). The theme is strictly 'Clinical & Dense'.",
+    "Build Shadcn components exactly to the dense spec, overriding default excessive padding if needed.",
+    "Ensure 'Cannot resolve: data not available' is shown prominently for missing criteria, with a distinct grey dash state.",
+    "For criteria contradictory data, explicitly show the conflicting records in a red/amber tinted sub-box with 'Record 1 [timestamp]' and 'Record 2 [timestamp]'.",
+    "Keep 'Accept' and 'Exclude' actions purely in-memory (update state).",
+    "Implement actual arrow key navigation in the left pane: hitting ArrowDown should move the selected patient down and load their data on the right.",
+    "DO NOT use a fully transparent header. Always use a solid background for navigation/banners."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Create depth through layering, not excessive shadows (z-index hierarchy).",
+    "Never center-align paragraphs, lists, or dense data. Left-align for reading flow.",
+    "Do not use AI assistant Emojis.",
+    "Use Phosphor icons or lucide-react. Emojis are strictly banned for this clinical UI.",
+    "Prioritize using pre-existing components from src/components/ui.",
+    "All forms and interactive UI must include data-testid.",
+    "Toasts must use 'sonner' library.",
+    "Always apply focus states with higher contrast than the default state."
+  ]
+}
